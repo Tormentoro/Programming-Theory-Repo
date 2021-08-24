@@ -3,7 +3,15 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Rock
+  - Alien
+  - WallRocks
+  - Ground
+  - AlienBoss
+  - PowerUpBomb
+  - PowerUpHealth
+  - SafeSpace
   layers:
   - Default
   - TransparentFX
