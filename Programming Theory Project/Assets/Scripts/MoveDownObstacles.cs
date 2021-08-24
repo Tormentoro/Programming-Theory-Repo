@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MoveDownObstacles : MonoBehaviour
+public class MoveDownObstacles : MonoBehaviour                              // INHERITANCE
 {
     private float zDestroy = -36;
 
@@ -10,11 +10,11 @@ public class MoveDownObstacles : MonoBehaviour
     {
         if (!GameManager.GM.playerDead && !GameManager.GM.gameWon)
         {
-            ObstacleBehaviour();
+            ObstacleBehaviour();                                            //ABSTRACTION
         }
     }
-    public virtual void ObstacleBehaviour()
-    {
+    public virtual void ObstacleBehaviour()                             //ABSTRACTION
+    {                                                               // POLYMORPHISM
         if (GameManager.GM.gameIsStarted)
         {
             transform.Translate(Vector3.back * GameManager.GM.speed * Time.deltaTime, Space.World);

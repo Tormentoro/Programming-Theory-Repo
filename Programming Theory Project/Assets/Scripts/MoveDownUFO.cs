@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-public class MoveDownUFO : MoveDownObstacles
+public class MoveDownUFO : MoveDownObstacles                            // INHERITANCE
 {
     protected GameObject player;
     [SerializeField] protected Rigidbody objectRB;
@@ -41,8 +41,8 @@ public class MoveDownUFO : MoveDownObstacles
         if (GameManager.GM.gameIsStarted)
         {
             lookDirection = player.transform.position - transform.position;
-            ObstacleBehaviour();
-            DamageControl();
+            ObstacleBehaviour();                                                //ABSTRACTION
+            DamageControl();                                                    //ABSTRACTION
         }
     }
     private void OnCollisionEnter(Collision collision)
@@ -66,9 +66,8 @@ public class MoveDownUFO : MoveDownObstacles
                 totalBoomPS.Play();
                 healthUfo = 0;
                 healthBar.value = healthUfo;
-                //Destroy(gameObject, 0.5f);                                        //версия без пула объектов
-                gameObject.SetActive(false);                                              //версия с пулом объектов
-                ResetUfoParameters();
+                gameObject.SetActive(false); 
+                ResetUfoParameters();                                           //ABSTRACTION
                 Debug.Log("Parameters resetted");
             }
             if (collision.gameObject.CompareTag("Player"))
@@ -77,8 +76,8 @@ public class MoveDownUFO : MoveDownObstacles
             }
         }
     }
-    public override void ObstacleBehaviour()
-    {
+    public override void ObstacleBehaviour()                                    //ABSTRACTION
+    {                                                                           // POLYMORPHISM
         lookDirection = player.transform.position - transform.position;
         if ((lookDirection.magnitude < 20 || isAimed) && healthUfo > 0)
         {
@@ -87,18 +86,17 @@ public class MoveDownUFO : MoveDownObstacles
 
             if (transform.position.z < GameManager.GM.zDestroyUfo)
             {
-                //Destroy(gameObject);                                        //версия без пула объектов
-                gameObject.SetActive(false);                                              //версия с пулом объектов
-                ResetUfoParameters();
+                gameObject.SetActive(false);    
+                ResetUfoParameters();                                               //ABSTRACTION
                 Debug.Log("Parameters resetted");
             }
         }
         else
         {
-            base.ObstacleBehaviour();
+            base.ObstacleBehaviour();                                                   //ABSTRACTION
         }
     }
-    public virtual void DamageControl()
+    public virtual void DamageControl()                                             // POLYMORPHISM
     {
         if (healthUfo < 0)
             healthUfo = 0;
@@ -113,13 +111,12 @@ public class MoveDownUFO : MoveDownObstacles
                 GameManager.GM.score += 1 * GameManager.GM.diffMultiplier;
                 GameManager.GM.ufoKillCounter += 1;
             }
-            //Destroy(gameObject, 0.5f);                                        //версия без пула объектов
-            gameObject.SetActive(false);                                              //версия с пулом объектов
-            ResetUfoParameters();
+            gameObject.SetActive(false);                                           
+            ResetUfoParameters();                                                           //ABSTRACTION
             Debug.Log("Parameters resetted");
         }
     }
-    private void ResetUfoParameters()
+    private void ResetUfoParameters()                                                       //ABSTRACTION
     {
         healthUfo = GameManager.GM.healthUfo;
         healthBar.value = GameManager.GM.healthUfo;

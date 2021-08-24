@@ -41,7 +41,7 @@ public class PlayerController : MonoBehaviour
         }
         else if (gameObject.CompareTag("SafeSpace"))
         {
-            MainMenuBehaviour();
+            MainMenuBehaviour();                            //ABSTRACTION
         }
     }
     void Update()
@@ -51,19 +51,17 @@ public class PlayerController : MonoBehaviour
             PlayerMovementSettings();
             PlayBoundsZ();
             PlayBoundsX();
-            //if (!GameManager.GM.bossAlive && respondTime > 0.01f)
-            //    GameManager.GM.gotBomb = false;
         }
     }
-    void PlayerMovementSettings()
+    void PlayerMovementSettings()                               //ABSTRACTION
     {
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
 
         transform.Translate(Vector3.forward * verticalInput * speed * Time.deltaTime, Space.World);
         transform.Translate(Vector3.right * horizontalInput * speed * Time.deltaTime, Space.World);
-    }
-    void PlayBoundsZ()
+    }                       
+    void PlayBoundsZ()                                          //ABSTRACTION
     {
         if (transform.position.z < zNegativeBound)
         {
@@ -74,7 +72,7 @@ public class PlayerController : MonoBehaviour
             transform.position = new Vector3(transform.position.x, transform.position.y, zBound);
         }
     }
-    void PlayBoundsX()
+    void PlayBoundsX()                                          //ABSTRACTION
     {
         if (transform.position.x < -xBound)
         {
@@ -155,11 +153,11 @@ public class PlayerController : MonoBehaviour
             InvokeRepeating("IntroJumpingFolks", 0, 3);
         }
     }
-    void IntroJumpingFolks()
+    void IntroJumpingFolks()                                        //ABSTRACTION
     {
         playerAnim.Play("Standing_Jump");
     }
-    void ChoosePlayerAppearance()
+    void ChoosePlayerAppearance()                                   //ABSTRACTION
     {
         if (GameManager.GM.charWrangler)
         {
@@ -194,7 +192,7 @@ public class PlayerController : MonoBehaviour
             gameObject.transform.GetChild(4).gameObject.SetActive(true);
         }
     }
-    void MainMenuBehaviour()
+    void MainMenuBehaviour()                                            //ABSTRACTION
     {
         InvokeRepeating("IntroJumpingFolks", 0, 3);
         gameObject.transform.GetChild(5).gameObject.SetActive(false);

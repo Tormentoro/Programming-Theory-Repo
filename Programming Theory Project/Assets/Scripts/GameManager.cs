@@ -10,7 +10,7 @@ using UnityEditor;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager GM { get; private set; }
+    public static GameManager GM { get; private set; }          //ENCAPSULATION
 
     public float scoreLimit; // area limits fo scorring
     public float speed;
@@ -58,19 +58,9 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         gameIsStarted = false;
-        Easy();
-    }
-    private void Update()
-    {
-        /*if (gameIsStarted)
-            if (!gotBomb && !GameObject.FindWithTag("Alien").GetComponent<MoveDownUFO>().counted)
-            {
-                ufoList.Add(GameObject.FindWithTag("Alien"));
-                GameObject.FindWithTag("Alien").GetComponent<MoveDownUFO>().counted = true;
-            }*/
-
-    }
-    public void Easy()
+        Easy();                                                     //ABSTRACTION
+    }    
+    public void Easy()                                              //ABSTRACTION
     {
         scoreLimit = 25;
         speed = 3.5f;
@@ -83,7 +73,7 @@ public class GameManager : MonoBehaviour
         diffMultiplier = 1;
         victoryBossKillCounter = 1;
     }
-    public void Normal()
+    public void Normal()                                            //ABSTRACTION
     {
         scoreLimit = 20;
         speed = 5f;
@@ -96,7 +86,7 @@ public class GameManager : MonoBehaviour
         diffMultiplier = 2;
         victoryBossKillCounter = 2;
     }
-    public void Hard()
+    public void Hard()                                              //ABSTRACTION
     {
         scoreLimit = 15;
         speed = 7.5f;
@@ -109,7 +99,7 @@ public class GameManager : MonoBehaviour
         diffMultiplier = 3;
         victoryBossKillCounter = 3;
     }
-    public void StartGame()
+    public void StartGame()                                         //ABSTRACTION
     {
         gameIsStarted = true;
         bossSpawned = false;
@@ -128,7 +118,7 @@ public class GameManager : MonoBehaviour
         }
         SceneManager.LoadScene(1);
     }
-    public void ExitToMenu()
+    public void ExitToMenu()                                        //ABSTRACTION
     {
         gameIsStarted = false;
         bossSpawned = false;
@@ -140,7 +130,7 @@ public class GameManager : MonoBehaviour
         safeSpaceActivated = false;
         SceneManager.LoadScene(0);
     }
-    public void ExitGame()
+    public void ExitGame()                                          //ABSTRACTION
     {
 #if UNITY_EDITOR
         EditorApplication.ExitPlaymode();

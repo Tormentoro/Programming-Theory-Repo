@@ -32,11 +32,11 @@ public class UIManagerGame : MonoBehaviour
             {
                 if (!isPaused)
                 {
-                    ToGameMenu();
+                    ToGameMenu();                   //ABSTRACTION
                 }
                 else if (isPaused)
                 {
-                    ReturnToGame();
+                    ReturnToGame();                 //ABSTRACTION
                 }
             }
         }
@@ -46,26 +46,26 @@ public class UIManagerGame : MonoBehaviour
             youWonPanelGameMenu.SetActive(true);
         }
     }
-    public void StartGame()
+    public void StartGame()                         //ABSTRACTION
     {
         GameManager.GM.StartGame();
     }
-    public void ExitFromGame()
+    public void ExitFromGame()                  //ABSTRACTION
     {
         GameManager.GM.ExitGame();
     }
-    public void ExitToMenuFromGameScene()
+    public void ExitToMenuFromGameScene()       //ABSTRACTION
     {
         Time.timeScale = 1;
         GameManager.GM.ExitToMenu();
     }
-    public void ToGameMenu()
+    public void ToGameMenu()                    //ABSTRACTION
     {
         Time.timeScale = 0;
         pausePanelGameMenu.SetActive(true);
         isPaused = true;
     }
-    public void ReturnToGame()
+    public void ReturnToGame()                  //ABSTRACTION
     {
         pausePanelGameMenu.SetActive(false);
         isPaused = false;

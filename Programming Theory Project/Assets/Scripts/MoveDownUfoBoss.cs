@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MoveDownUfoBoss : MoveDownUFO
+public class MoveDownUfoBoss : MoveDownUFO                                  // INHERITANCE
 {
     int healthUfoBoss;
 
@@ -32,12 +32,12 @@ public class MoveDownUfoBoss : MoveDownUFO
         if (!gameObject.CompareTag("SafeSpace"))
             if (GameManager.GM.gameIsStarted && !GameManager.GM.playerDead && !GameManager.GM.gameWon)
             {
-                ObstacleBehaviour();
-                DamageControl();
+                ObstacleBehaviour();                        //ABSTRACTION
+                DamageControl();                            //ABSTRACTION
             }
     }
-    public override void ObstacleBehaviour()
-    {
+    public override void ObstacleBehaviour()                //ABSTRACTION
+    {                                                           // POLYMORPHISM
         if (GameManager.GM.bossAlive)
         {
             Vector3 lookDirection = player.transform.position - transform.position;
@@ -56,8 +56,8 @@ public class MoveDownUfoBoss : MoveDownUFO
             }
         }
     }
-    public override void DamageControl()
-    {
+    public override void DamageControl()                                            //ABSTRACTION
+    {                                                                   // POLYMORPHISM
         if (GameManager.GM.gotBomb)
         {
             smallBoomPS.Play();

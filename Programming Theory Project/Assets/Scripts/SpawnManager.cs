@@ -34,7 +34,6 @@ public class SpawnManager : MonoBehaviour
         InvokeRepeating("spawnHealth", startDelay, healthSpawnTime);
         InvokeRepeating("spawnAlienBoss", startDelay, healthSpawnTime);
         InvokeRepeating("spawnBomb", startDelay, bombSpawnTime);
-        InvokeRepeating("spawnSafeSpace", startDelay, 15);
     }
     private void Update()
     {
@@ -48,8 +47,9 @@ public class SpawnManager : MonoBehaviour
                 GameManager.GM.bossSpawned = true;
                 GameManager.GM.bossAlive = true;
             }
+        SpawnSafeSpace();                                                               //ABSTRACTION
     }
-    private void spawnRocks()
+    private void spawnRocks()                                                           //ABSTRACTION
     {
         if (!GameManager.GM.playerDead && !GameManager.GM.safeSpaceActivated)
         {
@@ -65,9 +65,9 @@ public class SpawnManager : MonoBehaviour
             Instantiate(rocks[randomIndex], spawnPos, currentRotation);
         }
     }
-    private void spawnAlien()
+    private void spawnAlien()                                                           //ABSTRACTION
     {
-        GameObject pooledUfo = ObjectPooler.PO.GetPooledUfo();                           //версия с пулом объектов
+        GameObject pooledUfo = ObjectPooler.PO.GetPooledUfo();                           
         if (!GameManager.GM.playerDead && !GameManager.GM.safeSpaceActivated)
             if (!GameManager.GM.bossSpawned && !GameManager.GM.bossAlive)
             {
@@ -76,13 +76,12 @@ public class SpawnManager : MonoBehaviour
                 Vector3 spawnPos = new Vector3(randomX, ySpawn + 2.7f, zSpawnAlien);
                 if (pooledUfo != null)
                 {
-                    pooledUfo.SetActive(true);                                              //версия с пулом объектов
-                    pooledUfo.transform.position = spawnPos;                                //
+                    pooledUfo.SetActive(true);                                              
+                    pooledUfo.transform.position = spawnPos;                                
                 }
-                //Instantiate(alien, spawnPos, alien.gameObject.transform.rotation);        //версия без пула объектов
             }
     }
-    private void spawnAlienBoss()
+    private void spawnAlienBoss()                                                       //ABSTRACTION
     {
         if (GameManager.GM.bossSpawned && GameManager.GM.bossAlive && !GameManager.GM.safeSpaceActivated)
         {
@@ -95,7 +94,7 @@ public class SpawnManager : MonoBehaviour
             Instantiate(alienBoss, spawnPos, alienBoss.gameObject.transform.rotation);
         }
     }
-    private void spawnHealth()
+    private void spawnHealth()                                                              //ABSTRACTION
     {
         if (!GameManager.GM.playerDead && !GameManager.GM.safeSpaceActivated)
         {
@@ -105,8 +104,8 @@ public class SpawnManager : MonoBehaviour
             Instantiate(health, spawnPos, health.gameObject.transform.rotation);
         }
     }
-    private void spawnBomb()
-    {
+    private void spawnBomb()                                                            //ABSTRACTION
+    {   
         if (!GameManager.GM.playerDead && !GameManager.GM.safeSpaceActivated)
         {
             float randomX = Random.Range(-xSpawnLimitPowerup, xSpawnLimitPowerup);
@@ -115,7 +114,7 @@ public class SpawnManager : MonoBehaviour
             Instantiate(bomb, spawnPos, bomb.gameObject.transform.rotation);
         }
     }
-    private void spawnSafeSpace()
+    private void SpawnSafeSpace()                                                       //ABSTRACTION
     {
         if (!GameManager.GM.playerDead && GameManager.GM.bossKillCounter == GameManager.GM.victoryBossKillCounter)
         {

@@ -9,11 +9,11 @@ public class UIManagerMenu : MonoBehaviour
     [SerializeField] TMP_Dropdown difChooseMainMenu;
     [SerializeField] TMP_Dropdown charChooseMainMenu;
 
-    public void StartGame()
+    public void StartGame()                     //ABSTRACTION
     {
         GameManager.GM.StartGame();
     }
-    public void Difficulty()
+    public void Difficulty()                    //ABSTRACTION
     {
         if (difChooseMainMenu.value == 0)
             GameManager.GM.Easy();
@@ -22,12 +22,12 @@ public class UIManagerMenu : MonoBehaviour
         if (difChooseMainMenu.value == 2)
             GameManager.GM.Hard();
     }
-    public void ExitFromGame()
+    public void ExitFromGame()                  //ABSTRACTION
     {
         GameManager.GM.ExitGame();
     }
-    public void ChooseCharacter()
-    {
+    public void ChooseCharacter()               //ABSTRACTION
+    {   
         if (charChooseMainMenu.value == 0)
         {
             GameManager.GM.charWrangler = true;
