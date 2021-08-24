@@ -97,12 +97,7 @@ public class PlayerController : MonoBehaviour
             Vector3 lookDirection = collision.gameObject.transform.position - transform.position;
             playerRB.AddForce(lookDirection.normalized * GameManager.GM.speedRB * -100 * Time.deltaTime, ForceMode.Impulse);
         }
-        if (gameObject.CompareTag("Player") && health == 0 && GameManager.GM.gameIsStarted)
-        {
-            GameManager.GM.playerDead = true;
-            dirtPS.Stop();
-            playerAnim.SetBool("Death_b", true);
-        }
+        PlayerDead();
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -111,6 +106,13 @@ public class PlayerController : MonoBehaviour
         {
             health -= 1;
             healthBar.value = health;
+            PlayerDead();
+            if (gameObject.CompareTag("Player") && health == 0 && GameManager.GM.gameIsStarted)
+        {
+            GameManager.GM.playerDead = true;
+            dirtPS.Stop();
+            playerAnim.SetBool("Death_b", true);
+        }
             GameManager.GM.gotBomb = true;
             Destroy(other.gameObject);
             if (!GameManager.GM.bossAlive)
@@ -122,6 +124,8 @@ public class PlayerController : MonoBehaviour
                         ufo.GetComponent<MoveDownUFO>().smallBoomPS.Play();
                         ufo.GetComponent<MoveDownUFO>().healthUfo -= 1;
                         ufo.GetComponent<MoveDownUFO>().healthBar.value = ufo.GetComponent<MoveDownUFO>().healthUfo;
+                        if (!ufo.GetComponent<MoveDownUFO>().isAimed)
+                            ufo.GetComponent<MoveDownUFO>().isAimed = true;
                     }               
                 }
                 GameManager.GM.gotBomb = false;
@@ -207,6 +211,15 @@ public class PlayerController : MonoBehaviour
                 gameObject.transform.GetChild(3).gameObject.SetActive(false);
             else if (GameManager.GM.charDaughter)
                 gameObject.transform.GetChild(4).gameObject.SetActive(false);
+        }
+    }
+    void PlayerDead()
+    {
+        if (gameObject.CompareTag("Player") && health == 0 && GameManager.GM.gameIsStarted)
+        {
+            GameManager.GM.playerDead = true;
+            dirtPS.Stop();
+            playerAnim.SetBool("Death_b", true);
         }
     }
 }
